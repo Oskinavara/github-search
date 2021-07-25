@@ -2,12 +2,13 @@ import { Action } from '../actions';
 import { ActionType } from '../action-types';
 import { User } from 'src/interfaces';
 
-interface State {
+export interface State {
+  error: string;
   loading: boolean;
   users: User[];
 }
 
-const initialState: State = { loading: false, users: [] };
+const initialState: State = { loading: false, users: [], error: '' };
 
 const usersReducer = (state = initialState, action: Action) => {
   switch (action.type) {
@@ -26,6 +27,11 @@ const usersReducer = (state = initialState, action: Action) => {
             };
           } else return user;
         }),
+      };
+    case ActionType.SET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

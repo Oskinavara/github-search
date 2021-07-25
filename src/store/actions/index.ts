@@ -1,5 +1,5 @@
 import { ActionType } from '../action-types';
-import { User } from 'src/interfaces';
+import { User, Repository } from 'src/interfaces';
 
 interface FetchUsersAction {
   type: ActionType.FETCH_USERS;
@@ -13,7 +13,12 @@ interface SetLoadingAction {
 
 interface FetchRepositoriesAction {
   type: ActionType.FETCH_REPOSITORIES;
-  payload: any;
+  payload: { data: Repository; index: number };
 }
 
-export type Action = FetchUsersAction | SetLoadingAction | FetchRepositoriesAction;
+interface SetErrorAction {
+  type: ActionType.SET_ERROR;
+  payload: Error;
+}
+
+export type Action = FetchUsersAction | SetLoadingAction | FetchRepositoriesAction | SetErrorAction;
